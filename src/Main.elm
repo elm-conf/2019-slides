@@ -30,12 +30,13 @@ update msg model =
 
 init : Flags -> ( Slides, Cmd Msg )
 init msg =
-    ( Zipper.singleton
-        (Slide.CenteredInfo
-            { title = "Welcome to elm-conf"
-            , text = "What's your favorite ice cream flavor?"
+    ( Zipper.fromCons
+        (Slide.Splash { title = "Welcome to elm-conf" })
+        [ Slide.CenteredInfo
+            { title = "Code of Conduct"
+            , text = "test test test test test test test test test test test test test test test test test test test test test test test test test test test"
             }
-        )
+        ]
     , Cmd.none
     )
 
