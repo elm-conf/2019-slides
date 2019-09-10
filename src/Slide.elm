@@ -26,6 +26,7 @@ heading text =
             [ Css.fontSize (Css.vh 12)
             , Css.fontFamilies [ "Vollkorn" ]
             , Css.color (Css.hex "FF5F6D")
+            , Css.marginBottom (Css.vh 2)
             ]
         ]
         [ Html.text text ]
