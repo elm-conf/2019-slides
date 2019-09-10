@@ -2,6 +2,7 @@ module Main exposing (main)
 
 import Browser
 import Css
+import Css.Global as Global
 import Html as RootHtml
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Attributes exposing (css)
@@ -56,7 +57,10 @@ main =
         , view =
             \model ->
                 { title = "Slides"
-                , body = [ Html.toUnstyled (view model) ]
+                , body =
+                    [ (Html.toUnstyled << Global.global) [ Global.everything [ Css.boxSizing Css.borderBox ] ]
+                    , Html.toUnstyled (view model)
+                    ]
                 }
         , subscriptions = \_ -> Sub.none
         }
