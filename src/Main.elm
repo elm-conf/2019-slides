@@ -31,7 +31,7 @@ update msg model =
 init : Flags -> ( Slides, Cmd Msg )
 init msg =
     ( Zipper.fromCons
-        (Slide.Splash { title = "Welcome to elm-conf" })
+        Slide.Splash
         [ Slide.CenteredInfo
             { title = "Code of Conduct"
             , text = "test test test test test test test test test test test test test test test test test test test test test test test test test test test"

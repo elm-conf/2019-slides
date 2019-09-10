@@ -7,20 +7,26 @@ import Logo
 
 
 type Slide
-    = Splash { title : String }
+    = Splash
     | CenteredInfo { title : String, text : String }
 
 
 view : Slide -> Html msg
 view slide =
     case slide of
-        Splash { title } ->
-            Html.section []
+        Splash ->
+            Html.section
+                [ css
+                    [ Css.displayFlex
+                    , Css.flexDirection Css.column
+                    , Css.alignItems Css.center
+                    ]
+                ]
                 [ Logo.logo
                     [ Css.height (Css.vh 25)
-                    , Css.marginBottom (Css.vh 2)
+                    , Css.marginBottom (Css.vh 3)
                     ]
-                , heading title
+                , heading "elm-conf 2019"
                 ]
 
         CenteredInfo { title, text } ->
