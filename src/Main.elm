@@ -8,6 +8,7 @@ import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Attributes exposing (css)
 import List.Zipper as Zipper exposing (Zipper)
 import Slide exposing (Slide)
+import Time
 import Waves
 
 
@@ -80,5 +81,7 @@ main =
                     , Html.toUnstyled (view model)
                     ]
                 }
-        , subscriptions = \_ -> Sub.none
+        , subscriptions =
+            \_ ->
+                Time.every 7500 (\_ -> Advance)
         }
