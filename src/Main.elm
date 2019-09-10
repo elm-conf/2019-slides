@@ -1,8 +1,10 @@
 module Main exposing (main)
 
 import Browser
+import Css
 import Html as RootHtml
 import Html.Styled as Html exposing (Html)
+import Html.Styled.Attributes as Attributes exposing (css)
 import List.Zipper as Zipper exposing (Zipper)
 import Slide exposing (Slide)
 
@@ -33,7 +35,14 @@ init msg =
 
 view : Slides -> Html Msg
 view slides =
-    Slide.view (Zipper.current slides)
+    Html.div
+        [ css
+            [ Css.width (Css.pct 100)
+            , Css.height (Css.vh 100)
+            , Css.borderTop3 (Css.vh 1) Css.solid (Css.hex "FF5F6D")
+            ]
+        ]
+        [ Slide.view (Zipper.current slides) ]
 
 
 main : Program Flags Slides Msg
