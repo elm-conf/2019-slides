@@ -15,8 +15,8 @@ type alias Slides =
     Zipper Slide
 
 
-type alias Msg =
-    ()
+type Msg
+    = Advance
 
 
 type alias Flags =
@@ -24,8 +24,17 @@ type alias Flags =
 
 
 update : Msg -> Slides -> ( Slides, Cmd Msg )
-update msg model =
-    ( model, Cmd.none )
+update msg slides =
+    case msg of
+        Advance ->
+            ( case Zipper.next slides of
+                Nothing ->
+                    Zipper.first slides
+
+                Just next ->
+                    next
+            , Cmd.none
+            )
 
 
 init : Flags -> ( Slides, Cmd Msg )
