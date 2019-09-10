@@ -57,5 +57,6 @@ paragraph =
             [ Css.fontFamilies [ "Work Sans" ]
             , Css.fontSize (Css.vh 3)
             , Css.color (Css.hex "444")
+            , Css.maxWidth (Css.vw 61.803)
             ]
         ]
