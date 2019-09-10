@@ -6,5 +6,5 @@ let
 in with nixpkgs;
 stdenv.mkDerivation {
   name = "slides";
-  buildInputs = [ elmPackages.elm niv.niv ];
+  buildInputs = [ elmPackages.elm niv.niv nodePackages.npm nodejs-12_x ];
 }
