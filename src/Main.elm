@@ -1,15 +1,20 @@
-module Main exposing (main)
+port module Main exposing (main)
 
 import Browser
+import Browser.Events exposing (onKeyDown)
 import Css
 import Css.Global as Global
 import Html as RootHtml
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Attributes exposing (css)
+import Json.Decode as Decode
 import List.Zipper as Zipper exposing (Zipper)
 import Slide exposing (Slide)
 import Time
 import Waves
+
+
+port toggleFullscreen : () -> Cmd msg
 
 
 type alias Slides =
@@ -18,6 +23,7 @@ type alias Slides =
 
 type Msg
     = Advance
+    | Keypress String
 
 
 type alias Flags =
@@ -36,6 +42,14 @@ update msg slides =
                     next
             , Cmd.none
             )
+
+        Keypress "f" ->
+            ( slides
+            , toggleFullscreen ()
+            )
+
+        Keypress _ ->
+            ( slides, Cmd.none )
 
 
 init : Flags -> ( Slides, Cmd Msg )
@@ -83,5 +97,8 @@ main =
                 }
         , subscriptions =
             \_ ->
-                Time.every 7500 (\_ -> Advance)
+                Sub.batch
+                    [ Time.every 7500 (\_ -> Advance)
+                    , onKeyDown (Decode.map Keypress (Decode.field "key" Decode.string))
+                    ]
         }
