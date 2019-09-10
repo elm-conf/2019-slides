@@ -6,15 +6,20 @@ import Html.Styled.Attributes exposing (css)
 
 
 type Slide
-    = CenteredInfo { title : String, text : String }
+    = Splash { title : String }
+    | CenteredInfo { title : String, text : String }
 
 
 view : Slide -> Html msg
 view slide =
     case slide of
+        Splash { title } ->
+            Html.section []
+                [ heading title ]
+
         CenteredInfo { title, text } ->
             Html.section []
-                [ heading title
+                [ subHeading title
                 , paragraph [ Html.text text ]
                 ]
 
@@ -32,12 +37,25 @@ heading text =
         [ Html.text text ]
 
 
+subHeading : String -> Html msg
+subHeading text =
+    Html.h1
+        [ css
+            [ Css.fontSize (Css.vh 8)
+            , Css.fontFamilies [ "Vollkorn" ]
+            , Css.color (Css.hex "FF5F6D")
+            , Css.marginBottom (Css.vh 2)
+            ]
+        ]
+        [ Html.text text ]
+
+
 paragraph : List (Html msg) -> Html msg
 paragraph =
     Html.p
         [ css
             [ Css.fontFamilies [ "Work Sans" ]
-            , Css.fontSize (Css.vh 5)
+            , Css.fontSize (Css.vh 3)
             , Css.color (Css.hex "444")
             ]
         ]
