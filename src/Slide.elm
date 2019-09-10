@@ -2,7 +2,8 @@ module Slide exposing (..)
 
 import Css exposing (rem)
 import Html.Styled as Html exposing (Html)
-import Html.Styled.Attributes exposing (css)
+import Html.Styled.Attributes as Attributes exposing (css)
+import Logo
 
 
 type Slide
@@ -15,7 +16,12 @@ view slide =
     case slide of
         Splash { title } ->
             Html.section []
-                [ heading title ]
+                [ Logo.logo
+                    [ Css.height (Css.vh 25)
+                    , Css.marginBottom (Css.vh 2)
+                    ]
+                , heading title
+                ]
 
         CenteredInfo { title, text } ->
             Html.section []
