@@ -44,6 +44,9 @@ view slides =
             , Css.backgroundImage (Css.url ("data:image/svg+xml;base64," ++ Waves.data))
             , Css.backgroundSize Css.cover
             , Css.borderTop3 (Css.vh 1) Css.solid (Css.hex "FF5F6D")
+            , Css.displayFlex
+            , Css.alignItems Css.center
+            , Css.justifyContent Css.center
             ]
         ]
         [ Slide.view (Zipper.current slides) ]
