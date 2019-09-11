@@ -97,7 +97,7 @@ init msg =
             }
         , Slide.Info
             { title = "Joel Clermont"
-            , text = "..."
+            , text = "Thank you to Joel Clermont for providing community sponsorship for elm-conf."
             }
         ]
     , Cmd.none
