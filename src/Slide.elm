@@ -9,6 +9,7 @@ import Logo
 type Slide
     = Splash
     | Info { title : String, text : String }
+    | Image { src : String, title : String, text : String }
 
 
 view : Slide -> Html msg
@@ -33,6 +34,35 @@ view slide =
             Html.section []
                 [ subHeading title
                 , paragraph [ Html.text text ]
+                ]
+
+        Image { src, title, text } ->
+            Html.section
+                [ css
+                    [ Css.displayFlex
+                    , Css.maxWidth (Css.vw 61.803)
+                    ]
+                ]
+                [ Html.div
+                    [ css
+                        [ Css.margin (Css.vh 4)
+                        , Css.width (Css.pct (100 - 61.803))
+                        , Css.height Css.auto
+                        , Css.displayFlex
+                        , Css.alignItems Css.center
+                        ]
+                    ]
+                    [ Html.img
+                        [ Attributes.src src
+                        , Attributes.alt title
+                        , css [ Css.width (Css.pct 100) ]
+                        ]
+                        []
+                    ]
+                , Html.div [ css [ Css.width (Css.pct 61.803) ] ]
+                    [ subHeading title
+                    , paragraph [ Html.text text ]
+                    ]
                 ]
 
 
