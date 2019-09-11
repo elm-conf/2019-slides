@@ -59,7 +59,14 @@ view slide =
                         ]
                         []
                     ]
-                , Html.div [ css [ Css.width (Css.pct 61.803) ] ]
+                , Html.div
+                    [ css
+                        [ Css.width (Css.pct 61.803)
+                        , Css.displayFlex
+                        , Css.flexDirection Css.column
+                        , Css.justifyContent Css.center
+                        ]
+                    ]
                     [ subHeading title
                     , paragraph [ Html.text text ]
                     ]
