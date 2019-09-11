@@ -23,6 +23,7 @@ type alias Slides =
 
 type Msg
     = Advance
+    | GoBack
     | Keypress String
 
 
@@ -43,10 +44,26 @@ update msg slides =
             , Cmd.none
             )
 
+        GoBack ->
+            ( case Zipper.previous slides of
+                Nothing ->
+                    Zipper.last slides
+
+                Just prev ->
+                    prev
+            , Cmd.none
+            )
+
         Keypress "f" ->
             ( slides
             , toggleFullscreen ()
             )
+
+        Keypress "ArrowLeft" ->
+            update GoBack slides
+
+        Keypress "ArrowRight" ->
+            update Advance slides
 
         Keypress _ ->
             ( slides, Cmd.none )
@@ -71,6 +88,7 @@ view slides =
         [ css
             [ Css.width (Css.pct 100)
             , Css.height (Css.vh 100)
+            , Css.backgroundColor (Css.hex "FFF")
             , Css.backgroundImage (Css.url ("data:image/svg+xml;base64," ++ Waves.data))
             , Css.backgroundSize Css.cover
             , Css.borderTop3 (Css.vh 1) Css.solid (Css.hex "FF5F6D")
