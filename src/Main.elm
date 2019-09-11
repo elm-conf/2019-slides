@@ -73,7 +73,7 @@ init : Flags -> ( Slides, Cmd Msg )
 init msg =
     ( Zipper.fromCons
         Slide.Splash
-        [ Slide.CenteredInfo
+        [ Slide.Info
             { title = "Code of Conduct"
             , text = "All attendees, speakers, sponsors, and volunteers at our conference are required to agree with and follow the code of conduct, available at https://thestrangeloop.com/policies.html"
             }

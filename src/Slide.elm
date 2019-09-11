@@ -8,7 +8,7 @@ import Logo
 
 type Slide
     = Splash
-    | CenteredInfo { title : String, text : String }
+    | Info { title : String, text : String }
 
 
 view : Slide -> Html msg
@@ -29,7 +29,7 @@ view slide =
                 , heading "elm-conf 2019"
                 ]
 
-        CenteredInfo { title, text } ->
+        Info { title, text } ->
             Html.section []
                 [ subHeading title
                 , paragraph [ Html.text text ]
