@@ -17,8 +17,8 @@ import Waves
 port toggleFullscreen : () -> Cmd msg
 
 
-type alias Slides =
-    Zipper Slide
+type alias Model =
+    { slides : Zipper Slide }
 
 
 type Msg
@@ -31,81 +31,89 @@ type alias Flags =
     ()
 
 
-update : Msg -> Slides -> ( Slides, Cmd Msg )
-update msg slides =
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
     case msg of
         Advance ->
-            ( case Zipper.next slides of
-                Nothing ->
-                    Zipper.first slides
+            ( { model
+                | slides =
+                    case Zipper.next model.slides of
+                        Nothing ->
+                            Zipper.first model.slides
 
-                Just next ->
-                    next
+                        Just next ->
+                            next
+              }
             , Cmd.none
             )
 
         GoBack ->
-            ( case Zipper.previous slides of
-                Nothing ->
-                    Zipper.last slides
+            ( { model
+                | slides =
+                    case Zipper.previous model.slides of
+                        Nothing ->
+                            Zipper.last model.slides
 
-                Just prev ->
-                    prev
+                        Just prev ->
+                            prev
+              }
             , Cmd.none
             )
 
         Keypress "f" ->
-            ( slides
+            ( model
             , toggleFullscreen ()
             )
 
         Keypress "ArrowLeft" ->
-            update GoBack slides
+            update GoBack model
 
         Keypress "ArrowRight" ->
-            update Advance slides
+            update Advance model
 
         Keypress _ ->
-            ( slides, Cmd.none )
+            ( model, Cmd.none )
 
 
-init : Flags -> ( Slides, Cmd Msg )
+init : Flags -> ( Model, Cmd Msg )
 init msg =
-    ( Zipper.fromCons
-        Slide.Splash
-        [ Slide.Info
-            { title = "Code of Conduct"
-            , text = "All attendees, speakers, sponsors, and volunteers at our conference are required to agree with and follow the code of conduct, available at https://thestrangeloop.com/policies.html"
-            }
-        , Slide.Image
-            { src = "/programming-elm.jpg"
-            , title = "Programming Elm"
-            , text = "elm-conf attendees can get 20% off an ebook copy of Programming Elm by entering code \"elmconf_jfelm_2019\" at checkout: http://bit.ly/programming-elm"
-            }
-        , Slide.Info
-            { title = "Party"
-            , text = "Please join us at 7pm tonight for the Strange Loop party at City Museum. Shuttles will run between conference hotels (Union Station/Drury Inn, Hilton Ballpark, and Pear Tree Inn) and City Museum. Badges are not required, and family/friends are welcome to attend. Bring durable clothes and shoes if you plan to climb!"
-            }
-        , Slide.Image
-            { src = "/hubtran.png"
-            , title = "HubTran"
-            , text = "HubTran is a fast-growing technology startup focused on automating work in the logistics industry. Through a combination of a powerful browser based interface and machine learning, we are able to reduce our customer's workload by 4x or more. HubTran believes that Elm is the future of the front end. Our front end is already more than 60% Elm and we're looking for engineers to join our 15 person remote friendly engineering team."
-            }
-        , Slide.Info
-            { title = "Lunch"
-            , text = "Shuttles will run between 20th Street and downtown restaurant areas. Food trucks at Union Station are only available for PWLConf attendees."
-            }
-        , Slide.Info
-            { title = "Joel Clermont"
-            , text = "Thank you to Joel Clermont for providing community sponsorship for elm-conf."
-            }
-        ]
+    ( { slides =
+            Zipper.fromCons
+                Slide.Splash
+                [ Slide.Info
+                    { title = "Code of Conduct"
+                    , text = "All attendees, speakers, sponsors, and volunteers at our conference are required to agree with and follow the code of conduct, available at https://thestrangeloop.com/policies.html"
+                    }
+                , Slide.Image
+                    { src = "/programming-elm.jpg"
+                    , title = "Programming Elm"
+                    , text = "elm-conf attendees can get 20% off an ebook copy of Programming Elm by entering code \"elmconf_jfelm_2019\" at checkout: http://bit.ly/programming-elm"
+                    }
+                , Slide.Info
+                    { title = "Party"
+                    , text = "Please join us at 7pm tonight for the Strange Loop party at City Museum. Shuttles will run between conference hotels (Union Station/Drury Inn, Hilton Ballpark, and Pear Tree Inn) and City Museum. Badges are not required, and family/friends are welcome to attend. Bring durable clothes and shoes if you plan to climb!"
+                    }
+                , Slide.Image
+                    { src = "/hubtran.png"
+                    , title = "HubTran"
+                    , text = "HubTran is a fast-growing technology startup focused on automating work in the logistics industry. Through a combination of a powerful browser based interface and machine learning, we are able to reduce our customer's workload by 4x or more. HubTran believes that Elm is the future of the front end. Our front end is already more than 60% Elm and we're looking for engineers to join our 15 person remote friendly engineering team."
+                    }
+                , Slide.Info
+                    { title = "Lunch"
+                    , text = "Shuttles will run between 20th Street and downtown restaurant areas. Food trucks at Union Station are only available for PWLConf attendees."
+                    }
+                , Slide.Info
+                    { title = "Joel Clermont"
+                    , text = "Thank you to Joel Clermont for providing community sponsorship for elm-conf."
+                    }
+                ]
+      }
     , Cmd.none
     )
 
 
-view : Slides -> Html Msg
-view slides =
+view : Model -> Html Msg
+view { slides } =
     Html.div
         [ css
             [ Css.width (Css.pct 100)
@@ -145,7 +153,7 @@ wifi =
         ]
 
 
-main : Program Flags Slides Msg
+main : Program Flags Model Msg
 main =
     Browser.document
         { init = init
