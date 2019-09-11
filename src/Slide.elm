@@ -70,5 +70,6 @@ paragraph =
             , Css.fontSize (Css.vh 3)
             , Css.color (Css.hex "444")
             , Css.maxWidth (Css.vw 61.803)
+            , Css.lineHeight (Css.vh 5)
             ]
         ]
