@@ -169,7 +169,7 @@ main =
         , subscriptions =
             \_ ->
                 Sub.batch
-                    [ Time.every 7500 (\_ -> Advance)
+                    [ Time.every 15000 (\_ -> Advance)
                     , onKeyDown (Decode.map Keypress (Decode.field "key" Decode.string))
                     ]
         }
