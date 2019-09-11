@@ -78,6 +78,15 @@ init msg =
             , text = "All attendees, speakers, sponsors, and volunteers at our conference are required to agree with and follow the code of conduct, available at https://thestrangeloop.com/policies.html"
             }
         , Slide.Image
+            { src = "/programming-elm.jpg"
+            , title = "Programming Elm"
+            , text = "elm-conf attendees can get 20% off an ebook copy of Programming Elm by entering code \"elmconf_jfelm_2019\" at checkout: http://bit.ly/programming-elm"
+            }
+        , Slide.Info
+            { title = "Party"
+            , text = "Please join us at 7pm tonight for the Strange Loop party at City Museum. Shuttles will run between conference hotels (Union Station/Drury Inn, Hilton Ballpark, and Pear Tree Inn) and City Museum. Badges are not required, and family/friends are welcome to attend. Bring durable clothes and shoes if you plan to climb!"
+            }
+        , Slide.Image
             { src = "/hubtran.png"
             , title = "HubTran"
             , text = "HubTran is a fast-growing technology startup focused on automating work in the logistics industry. Through a combination of a powerful browser based interface and machine learning, we are able to reduce our customer's workload by 4x or more. HubTran believes that Elm is the future of the front end. Our front end is already more than 60% Elm and we're looking for engineers to join our 15 person remote friendly engineering team."
