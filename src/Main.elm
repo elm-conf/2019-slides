@@ -9,6 +9,7 @@ import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Attributes exposing (css)
 import Json.Decode as Decode
 import List.Zipper as Zipper exposing (Zipper)
+import NowPlaying exposing (Song)
 import Slide exposing (Slide)
 import Time
 import Waves
@@ -18,7 +19,9 @@ port toggleFullscreen : () -> Cmd msg
 
 
 type alias Model =
-    { slides : Zipper Slide }
+    { slides : Zipper Slide
+    , nowPlaying : Maybe Song
+    }
 
 
 type Msg
@@ -107,13 +110,14 @@ init msg =
                     , text = "Thank you to Joel Clermont for providing community sponsorship for elm-conf."
                     }
                 ]
+      , nowPlaying = Nothing
       }
     , Cmd.none
     )
 
 
 view : Model -> Html Msg
-view { slides } =
+view model =
     Html.div
         [ css
             [ Css.width (Css.pct 100)
@@ -127,8 +131,9 @@ view { slides } =
             , Css.justifyContent Css.center
             ]
         ]
-        [ Slide.view (Zipper.current slides)
+        [ Slide.view (Zipper.current model.slides)
         , wifi
+        , nowPlaying model.nowPlaying
         ]
 
 
@@ -151,6 +156,23 @@ wifi =
         , Html.strong [ css [ Css.fontWeight (Css.int 700) ] ] [ Html.text "Password: " ]
         , Html.text "1820"
         ]
+
+
+nowPlaying : Maybe Song -> Html msg
+nowPlaying maybeSong =
+    case maybeSong of
+        Nothing ->
+            Html.text ""
+
+        Just song ->
+            Html.div
+                [ css
+                    [ Css.position Css.absolute
+                    , Css.bottom (Css.vh 2)
+                    , Css.left (Css.vw 2)
+                    ]
+                ]
+                [ Html.text (Debug.toString song) ]
 
 
 main : Program Flags Model Msg
