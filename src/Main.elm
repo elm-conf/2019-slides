@@ -97,7 +97,30 @@ view slides =
             , Css.justifyContent Css.center
             ]
         ]
-        [ Slide.view (Zipper.current slides) ]
+        [ Slide.view (Zipper.current slides)
+        , wifi
+        ]
+
+
+wifi : Html msg
+wifi =
+    Html.p
+        [ css
+            [ Css.position Css.absolute
+            , Css.bottom (Css.vh 2)
+            , Css.right (Css.vw 2)
+            , Css.fontSize (Css.vh 3)
+            , Css.fontFamilies [ "Work Sans" ]
+            , Css.textAlign Css.right
+            , Css.lineHeight (Css.vh 4)
+            ]
+        ]
+        [ Html.strong [ css [ Css.fontWeight (Css.int 700) ] ] [ Html.text "Wi-Fi: " ]
+        , Html.text "Curio Meeting"
+        , Html.br [] []
+        , Html.strong [ css [ Css.fontWeight (Css.int 700) ] ] [ Html.text "Password: " ]
+        , Html.text "1820"
+        ]
 
 
 main : Program Flags Slides Msg
