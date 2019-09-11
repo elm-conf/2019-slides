@@ -75,7 +75,7 @@ init msg =
         Slide.Splash
         [ Slide.CenteredInfo
             { title = "Code of Conduct"
-            , text = "test test test test test test test test test test test test test test test test test test test test test test test test test test test"
+            , text = "All attendees, speakers, sponsors, and volunteers at our conference are required to agree with and follow the code of conduct, available at https://thestrangeloop.com/policies.html"
             }
         ]
     , Cmd.none
