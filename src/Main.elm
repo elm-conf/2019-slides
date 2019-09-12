@@ -132,6 +132,10 @@ init msg =
                     { title = "Joel Clermont"
                     , text = "Thank you to Joel Clermont for providing community sponsorship for elm-conf."
                     }
+                , Slide.Info
+                    { title = "Elm in Action"
+                    , text = "elm-conf attendees can get 40% off Manning books and videos (including Elm in Action) by using the code \"cwtelmconfus19\"."
+                    }
                 ]
       , nowPlaying = Nothing
       }
