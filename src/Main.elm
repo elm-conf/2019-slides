@@ -231,7 +231,12 @@ main =
             \model ->
                 { title = "Slides"
                 , body =
-                    [ (Html.toUnstyled << Global.global) [ Global.everything [ Css.boxSizing Css.borderBox ] ]
+                    [ (Html.toUnstyled << Global.global)
+                        [ Global.everything
+                            [ Css.boxSizing Css.borderBox
+                            , Css.cursor Css.none
+                            ]
+                        ]
                     , Html.toUnstyled (view model)
                     ]
                 }
