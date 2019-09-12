@@ -10,6 +10,7 @@ import Html.Styled.Attributes as Attributes exposing (css)
 import Http
 import Json.Decode as Decode
 import List.Zipper as Zipper exposing (Zipper)
+import Logo
 import NowPlaying exposing (Song)
 import Slide exposing (Slide)
 import Time
@@ -199,14 +200,19 @@ nowPlaying maybeSong =
                         , Css.marginRight (Css.vh 2)
                         ]
                     ]
-                    [ Html.img
-                        [ Attributes.src song.albumCoverUrl
-                        , css
-                            [ Css.width (Css.pct 100)
-                            , Css.borderRadius (Css.pct 20)
-                            ]
-                        ]
-                        []
+                    [ case song.albumCoverUrl of
+                        "missing value" ->
+                            Logo.logo [ Css.borderRadius (Css.pct 20) ]
+
+                        _ ->
+                            Html.img
+                                [ Attributes.src song.albumCoverUrl
+                                , css
+                                    [ Css.width (Css.pct 100)
+                                    , Css.borderRadius (Css.pct 20)
+                                    ]
+                                ]
+                                []
                     ]
                 , Html.p
                     [ css
