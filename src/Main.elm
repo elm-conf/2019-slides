@@ -134,7 +134,7 @@ init msg =
                     }
                 , Slide.Info
                     { title = "Elm in Action"
-                    , text = "elm-conf attendees can get 40% off Manning books and videos (including Elm in Action) by using the code \"cwtelmconfus19\"."
+                    , text = "elm-conf attendees can get 40% off Manning books and videos (including Elm in Action) by using the code \"ctwelfconfus19\"."
                     }
                 ]
       , nowPlaying = Nothing
