@@ -7,6 +7,7 @@ import Css.Global as Global
 import Html as RootHtml
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Attributes exposing (css)
+import Http
 import Json.Decode as Decode
 import List.Zipper as Zipper exposing (Zipper)
 import NowPlaying exposing (Song)
@@ -28,6 +29,8 @@ type Msg
     = Advance
     | GoBack
     | Keypress String
+    | RefreshNowPlaying
+    | NewNowPlaying (Result Http.Error Song)
 
 
 type alias Flags =
@@ -77,6 +80,21 @@ update msg model =
         Keypress _ ->
             ( model, Cmd.none )
 
+        RefreshNowPlaying ->
+            ( model
+            , NowPlaying.get NewNowPlaying
+            )
+
+        NewNowPlaying (Ok song) ->
+            ( { model | nowPlaying = Just song }
+            , Cmd.none
+            )
+
+        NewNowPlaying _ ->
+            ( { model | nowPlaying = Nothing }
+            , Cmd.none
+            )
+
 
 init : Flags -> ( Model, Cmd Msg )
 init msg =
@@ -112,7 +130,7 @@ init msg =
                 ]
       , nowPlaying = Nothing
       }
-    , Cmd.none
+    , NowPlaying.get NewNowPlaying
     )
 
 
@@ -192,6 +210,7 @@ main =
             \_ ->
                 Sub.batch
                     [ Time.every 15000 (\_ -> Advance)
+                    , Time.every 15000 (\_ -> RefreshNowPlaying)
                     , onKeyDown (Decode.map Keypress (Decode.field "key" Decode.string))
                     ]
         }
