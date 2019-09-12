@@ -210,7 +210,7 @@ main =
             \_ ->
                 Sub.batch
                     [ Time.every 15000 (\_ -> Advance)
-                    , Time.every 15000 (\_ -> RefreshNowPlaying)
+                    , Time.every 10000 (\_ -> RefreshNowPlaying)
                     , onKeyDown (Decode.map Keypress (Decode.field "key" Decode.string))
                     ]
         }
