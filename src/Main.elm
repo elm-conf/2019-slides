@@ -148,7 +148,7 @@ view model =
             , Css.backgroundColor (Css.hex "FFF")
             , Css.backgroundImage (Css.url ("data:image/svg+xml;base64," ++ Waves.data))
             , Css.backgroundSize Css.cover
-            , Css.borderTop3 (Css.vh 1) Css.solid (Css.hex "FF5F6D")
+            , Css.borderTop3 (Css.vh 3) Css.solid (Css.hex "FF5F6D")
             , Css.displayFlex
             , Css.alignItems Css.center
             , Css.justifyContent Css.center
@@ -165,8 +165,8 @@ wifi =
     Html.p
         [ css
             [ Css.position Css.absolute
-            , Css.bottom (Css.vh 2)
-            , Css.right (Css.vw 2)
+            , Css.bottom (Css.vh 4)
+            , Css.right (Css.vw 4)
             , Css.fontSize (Css.vh 3)
             , Css.fontFamilies [ "Work Sans" ]
             , Css.textAlign Css.right
@@ -191,8 +191,8 @@ nowPlaying maybeSong =
             Html.div
                 [ css
                     [ Css.position Css.absolute
-                    , Css.bottom (Css.vh 2)
-                    , Css.left (Css.vw 2)
+                    , Css.bottom (Css.vh 4)
+                    , Css.left (Css.vw 4)
                     , Css.displayFlex
                     , Css.alignItems Css.center
                     ]
