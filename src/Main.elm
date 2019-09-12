@@ -103,6 +103,10 @@ init msg =
             Zipper.fromCons
                 Slide.Splash
                 [ Slide.Info
+                    { title = "Captioning"
+                    , text = "You can stream captions to your laptop or phone. Set whatever text size and colors you like! http://bit.ly/elm-captions-2019"
+                    }
+                , Slide.Info
                     { title = "Code of Conduct"
                     , text = "All attendees, speakers, sponsors, and volunteers at our conference are required to agree with and follow the code of conduct, available at https://thestrangeloop.com/policies.html"
                     }
