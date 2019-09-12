@@ -11,8 +11,8 @@ type alias Song =
     }
 
 
-get : String -> (Result Http.Error Song -> msg) -> Cmd msg
-get token msg =
+get : (Result Http.Error Song -> msg) -> Cmd msg
+get msg =
     Http.request
         { method = "GET"
         , headers = []
