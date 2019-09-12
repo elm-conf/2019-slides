@@ -188,9 +188,38 @@ nowPlaying maybeSong =
                     [ Css.position Css.absolute
                     , Css.bottom (Css.vh 2)
                     , Css.left (Css.vw 2)
+                    , Css.displayFlex
+                    , Css.alignItems Css.center
                     ]
                 ]
-                [ Html.text (Debug.toString song) ]
+                [ Html.div
+                    [ css
+                        [ Css.height (Css.vh 10)
+                        , Css.width (Css.vh 10)
+                        , Css.marginRight (Css.vh 2)
+                        ]
+                    ]
+                    [ Html.img
+                        [ Attributes.src song.albumCoverUrl
+                        , css
+                            [ Css.width (Css.pct 100)
+                            , Css.borderRadius (Css.pct 20)
+                            ]
+                        ]
+                        []
+                    ]
+                , Html.p
+                    [ css
+                        [ Css.fontFamilies [ "Work Sans" ]
+                        , Css.fontSize (Css.vh 3)
+                        , Css.lineHeight (Css.vh 4)
+                        ]
+                    ]
+                    [ Html.strong [ css [ Css.fontWeight (Css.int 700) ] ] [ Html.text song.title ]
+                    , Html.br [] []
+                    , Html.text song.artist
+                    ]
+                ]
 
 
 main : Program Flags Model Msg
